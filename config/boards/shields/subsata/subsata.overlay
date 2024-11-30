@@ -70,7 +70,7 @@
 &i2c0 {
     compatible = "nordic,nrf-twi";
     status = "okay";
-    clock-frequency = <400000>;  // Try a higher frequency
+    clock-frequency = <400000>;
 
     pinctrl-0 = <&i2c0_default>;
     pinctrl-1 = <&i2c0_sleep>;
@@ -86,14 +86,12 @@
         display-offset = <0>;
         multiplex-ratio = <31>;
         prechargep = <0xf1>;
-        contrast = <0xff>;
         segment-remap;
         com-invdir;
         com-sequential;
-        inversion-on;
-        reset-delay-ms = <10>;
     };
 };
+
 
 
 // &i2c0 {
