@@ -120,7 +120,7 @@ board_spi: &spi1 {
         status = "okay";
         gpio-controller;
         spi-max-frequency = <2000000>;
-        #gpio-cells = <1>;
+        #gpio-cells = <2>;
         reg = <0>;
         ngpios = <8>;
     };
