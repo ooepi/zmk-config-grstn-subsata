@@ -13,25 +13,29 @@
         b-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <80>;
         status = "okay";
-    };
 
-    sensors: sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&encoder_1>;
-        triggers-per-rotation = <20>;
+        sensors: sensors {
+            compatible = "zmk,keymap-sensors";
+            sensors = <&encoder_1>;
+            triggers-per-rotation = <20>;
+        };
     };
 
     default_kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
 
-        row-gpios = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-                    <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-                    <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        row-gpios
+            = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
+            , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
 
-        col-gpios = <&pro_micro 7 GPIO_ACTIVE_HIGH>,
-                    <&pro_micro 6 GPIO_ACTIVE_HIGH>,
-                    <&pro_micro 5 GPIO_ACTIVE_HIGH>;
+        col-gpios
+            = <&pro_micro 7 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+            ;
     };
 
     default_transform: keymap_transform_0 {
@@ -46,8 +50,28 @@
     };
 };
 
-&pro_micro_i2c {
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 31)>;
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 31)>;
+            low-power-enable;
+        };
+    };
+};
+
+&i2c0 {
     status = "okay";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
