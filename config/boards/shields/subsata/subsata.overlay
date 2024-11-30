@@ -85,44 +85,17 @@
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <31>;
-        prechargep = <0xf1>;
         segment-remap;
         com-invdir;
         com-sequential;
+        prechargep = <0x22>;
+        
+        // Add these lines
+        page-offset = <0>;
+        display-offset = <0>;
+        inversion-on;
+        settings {
+            contrast = <128>;
+        };
     };
 };
-
-
-
-// &i2c0 {
-//     compatible = "nordic,nrf-twi";
-//     status = "okay";
-//     clock-frequency = <100000>;  // Try this standard speed
-
-//     pinctrl-0 = <&i2c0_default>;
-//     pinctrl-1 = <&i2c0_sleep>;
-//     pinctrl-names = "default", "sleep";
-
-//     oled: ssd1306@3c {
-//         compatible = "solomon,ssd1306fb";
-//         reg = <0x3c>;
-//         width = <128>;
-//         height = <32>;
-//         segment-offset = <0>;
-//         page-offset = <0>;
-//         display-offset = <0>;
-//         multiplex-ratio = <31>;
-//         segment-remap;
-//         com-invdir;
-//         com-sequential;
-//         prechargep = <0x22>;
-        
-//         // Add these lines
-//         page-offset = <0>;
-//         display-offset = <0>;
-//         inversion-on;
-//         settings {
-//             contrast = <128>;
-//         };
-//     };
-// };
