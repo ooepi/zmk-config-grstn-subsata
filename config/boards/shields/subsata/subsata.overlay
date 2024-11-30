@@ -67,8 +67,14 @@
     };
 };
 
-&pro_micro_i2c {
+&i2c0 {
+    compatible = "nordic,nrf-twi";
     status = "okay";
+    clock-frequency = <400000>;  // Try a higher frequency
+
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
@@ -79,13 +85,16 @@
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <31>;
+        prechargep = <0xf1>;
+        contrast = <0xff>;
         segment-remap;
         com-invdir;
         com-sequential;
         inversion-on;
-        prechargep = <0x22>;
+        reset-delay-ms = <10>;
     };
 };
+
 
 // &i2c0 {
 //     compatible = "nordic,nrf-twi";
