@@ -12,7 +12,7 @@
                 &kp N1 &kp N2 &kp N3
             >;
 
-            sensor-bindings = <&sensors_rotate_kp UP_ARROW DOWN_ARROW>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
 };
