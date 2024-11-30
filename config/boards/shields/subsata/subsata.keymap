@@ -3,15 +3,6 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    behaviors {
-        enc_key_press: enc_key_press {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENC_KEY_PRESS";
-            #sensor-binding-cells = <2>;
-            bindings = <&kp>, <&kp>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
         default_layer {
@@ -21,7 +12,7 @@
                 &kp N1 &kp N2 &kp N3
             >;
 
-            sensor-bindings = <&enc_key_press UP_ARROW DOWN_ARROW>;
+            sensor-bindings = <&sensors_rotate_kp UP_ARROW DOWN_ARROW>;
         };
     };
 };

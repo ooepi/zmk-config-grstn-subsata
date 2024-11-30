@@ -8,11 +8,16 @@
 
     encoder_1: encoder_1 {
         compatible = "alps,ec11";
-        label = "ENCODER_1";
-        a-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // D9/1.06
-        b-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // D8/1.04
-        resolution = <4>;
+        a-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <80>;
         status = "okay";
+
+        sensors: sensors {
+            compatible = "zmk,keymap-sensors";
+            sensors = <&encoder_1>;
+            triggers-per-rotation = <20>;
+        };
     };
 
     default_kscan: kscan {
