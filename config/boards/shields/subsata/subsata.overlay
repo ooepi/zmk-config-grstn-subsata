@@ -9,8 +9,8 @@
     encoder_1: encoder_1 {
         compatible = "alps,ec11";
         label = "ENCODER_1";
-        a-gpios = <&gpio1 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;    // P1.01 = GPIO9
-        b-gpios = <&gpio1 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;    // P1.00 = GPIO8
+        a-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;    // P0.09 (D8)
+        b-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;   // P0.10 (D9)
         resolution = <4>;
     };
 
@@ -19,13 +19,13 @@
         label = "KSCAN";
         diode-direction = "col2row";
         
-        row-gpios = <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, 
-                    <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-                    <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        row-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  // P0.10 (D16)
+                    <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,   // P0.09 (D14)
+                    <&gpio1 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  // P1.15 (D18)
 
-        col-gpios = <&pro_micro 4 GPIO_ACTIVE_HIGH>,
-                    <&pro_micro 5 GPIO_ACTIVE_HIGH>,
-                    <&pro_micro 6 GPIO_ACTIVE_HIGH>;
+        col-gpios = <&gpio0 24 GPIO_ACTIVE_HIGH>,  // P0.24 (D5)
+                    <&gpio1 0 GPIO_ACTIVE_HIGH>,   // P1.00 (D6)
+                    <&gpio0 11 GPIO_ACTIVE_HIGH>;  // P0.11 (D7)
     };
 
     default_transform: keymap_transform_0 {
