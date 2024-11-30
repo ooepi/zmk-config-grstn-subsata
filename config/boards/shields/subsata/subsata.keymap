@@ -3,9 +3,13 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&encoder_1>;
+    behaviors {
+        inc_dec_kp: inc_dec_kp {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_KP";
+            #sensor-binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+        };
     };
 
     keymap {
@@ -14,7 +18,7 @@
         default_layer {
             display-name = "Default";
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp A B>;
 
             bindings = <
                 &kp N7    &kp N8    &kp N9

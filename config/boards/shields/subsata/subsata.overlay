@@ -9,8 +9,8 @@
     encoder_1: encoder_1 {
         compatible = "alps,ec11";
         label = "ENCODER_1";
-        a-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        a-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // D9/1.06
+        b-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  // D8/1.04
         resolution = <4>;
         status = "okay";
     };
@@ -27,9 +27,9 @@
             ;
 
         col-gpios
-            = <&pro_micro 5 GPIO_ACTIVE_HIGH>
+            = <&pro_micro 7 GPIO_ACTIVE_HIGH>
             , <&pro_micro 6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 7 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
             ;
     };
 
