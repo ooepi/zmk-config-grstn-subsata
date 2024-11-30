@@ -4,9 +4,9 @@
 
 / {
     behaviors {
-        inc_dec_kp: inc_dec_kp {
+        enc_key_press: enc_key_press {
             compatible = "zmk,behavior-sensor-rotate";
-            label = "ENC_KP";
+            label = "ENC_KEY_PRESS";
             #sensor-binding-cells = <2>;
             bindings = <&kp>, <&kp>;
         };
@@ -14,17 +14,14 @@
 
     keymap {
         compatible = "zmk,keymap";
-
         default_layer {
-            display-name = "Default";
-
-            sensor-bindings = <&inc_dec_kp A B>;
-
             bindings = <
-                &kp N7    &kp N8    &kp N9
-                &kp N4    &kp N5    &kp N6
-                &kp N1    &kp N2    &kp N3
+                &kp N7 &kp N8 &kp N9
+                &kp N4 &kp N5 &kp N6
+                &kp N1 &kp N2 &kp N3
             >;
+
+            sensor-bindings = <&enc_key_press UP_ARROW DOWN_ARROW>;
         };
     };
 };
