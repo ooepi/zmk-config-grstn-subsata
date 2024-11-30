@@ -30,4 +30,7 @@ endchoice
 
 endif # LVGL
 
+config SPI
+    default y
+
 endif
