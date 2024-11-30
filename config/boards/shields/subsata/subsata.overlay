@@ -21,6 +21,14 @@
         };
     };
 
+    gpio_keys: gpio_keys {
+        compatible = "gpio-keys";
+        sr_key1: sr_key1 {
+            gpios = <&shift_reg 0 (GPIO_ACTIVE_HIGH)>;
+            label = "SR Key 1";
+        };
+    };
+
     default_kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
@@ -35,17 +43,19 @@
             = <&pro_micro 7 GPIO_ACTIVE_HIGH>
             , <&pro_micro 6 GPIO_ACTIVE_HIGH>
             , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+            , <&shift_reg 0 GPIO_ACTIVE_HIGH>
             ;
     };
 
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
-        columns = <3>;
+        columns = <4>;
         rows = <3>;
         map = <
             RC(0,0) RC(0,1) RC(0,2)
             RC(1,0) RC(1,1) RC(1,2)
             RC(2,0) RC(2,1) RC(2,2)
+            RC(0,3)
         >;
     };
 };
