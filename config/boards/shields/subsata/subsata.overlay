@@ -27,14 +27,13 @@
         compatible = "worldsemi,ws2812-gpio";
         label = "SK6812";
 
-        // Choose an available GPIO pin for data
         chain-length = <1>;    // Number of LEDs
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
         
-        // Pick an available GPIO pin
-        gpios = <&pro_micro 3 GPIO_ACTIVE_HIGH>;
+        // Change gpios to in-gpios
+        in-gpios = <&pro_micro 3 GPIO_ACTIVE_HIGH>;
     };
 
     gpio_keys: gpio_keys {
