@@ -25,14 +25,9 @@
 
     led_strip: ws2812 {
         compatible = "worldsemi,ws2812-gpio";
-        label = "SK6812";
-
-        chain-length = <1>;    // Number of LEDs
-        spi-one-frame = <0x70>;
-        spi-zero-frame = <0x40>;
-        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
         
-        // Change gpios to in-gpios
+        chain-length = <1>;    // Number of LEDs
+        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
         in-gpios = <&pro_micro 3 GPIO_ACTIVE_HIGH>;
     };
 
