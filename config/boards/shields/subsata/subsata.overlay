@@ -11,15 +11,15 @@
 
     encoder_1: encoder_1 {
         compatible = "alps,ec11";
-        a-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        a-gpios = <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <80>;
         status = "okay";
 
         sensors: sensors {
             compatible = "zmk,keymap-sensors";
             sensors = <&encoder_1>;
-            triggers-per-rotation = <20>;
+            triggers-per-rotation = <40>;
         };
     };
 
@@ -32,76 +32,141 @@
     };
 
     default_kscan: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
+    compatible = "zmk,kscan-gpio-matrix";
+    diode-direction = "col2row";
 
-        row-gpios
-            = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
-            , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
+    row-gpios
+        = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.17 (D2)
+        , <&pro_micro 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.20 (D3)
+        , <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.22 (D4)
+        , <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.24 (D5)
+        , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P1.00 (D6)
+        , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.11 (D7)
+        ;
 
-        col-gpios
-            = <&pro_micro 7 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
-            , <&shift_reg 0 GPIO_ACTIVE_HIGH>
-            ;
-    };
+    col-gpios
+        // First shift register (columns 0-7)
+        = <&shift_reg 0 GPIO_ACTIVE_HIGH>  // QA - Col 0
+        , <&shift_reg 1  GPIO_ACTIVE_HIGH>  // QB - Col 1
+        , <&shift_reg 2  GPIO_ACTIVE_HIGH>  // QC - Col 2
+        , <&shift_reg 3  GPIO_ACTIVE_HIGH>  // QD - Col 3
+        , <&shift_reg 4  GPIO_ACTIVE_HIGH>  // QE - Col 4
+        , <&shift_reg 5  GPIO_ACTIVE_HIGH>  // QF - Col 5
+        , <&shift_reg 6  GPIO_ACTIVE_HIGH>  // QG - Col 6
+        , <&shift_reg 7  GPIO_ACTIVE_HIGH>  // QH - Col 7
+        // Second shift register (columns 8-15)
+        , <&shift_reg 8 GPIO_ACTIVE_HIGH>  // QA - Col 8
+        , <&shift_reg 9  GPIO_ACTIVE_HIGH>  // QB - Col 9
+        , <&shift_reg 10  GPIO_ACTIVE_HIGH>  // QC - Col 10
+        , <&shift_reg 11  GPIO_ACTIVE_HIGH>  // QD - Col 11
+        , <&shift_reg 12  GPIO_ACTIVE_HIGH>  // QE - Col 12
+        , <&shift_reg 13  GPIO_ACTIVE_HIGH>  // QF - Col 13
+        , <&shift_reg 14  GPIO_ACTIVE_HIGH>  // QG - Col 14
+        , <&shift_reg 15  GPIO_ACTIVE_HIGH>  // QH - Col 15
+        // Direct GPIO pins
+        , <&pro_micro 1 GPIO_ACTIVE_HIGH>   // P0.06 (D1) - Col 16
+        , <&pro_micro 0 GPIO_ACTIVE_HIGH>   // P0.08 (D0) - Col 17
+        ;
+};
 
-    default_transform: keymap_transform_0 {
-        compatible = "zmk,matrix-transform";
-        columns = <4>;
-        rows = <3>;
-        map = <
-            RC(0,0) RC(0,1) RC(0,2)
-            RC(1,0) RC(1,1) RC(1,2)
-            RC(2,0) RC(2,1) RC(2,2)
-            RC(0,3)
-        >;
-    };
+default_transform: keymap_transform_0 {
+    compatible = "zmk,matrix-transform";
+    columns = <18>;
+    rows = <6>;
+    map = <
+        RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) RC(0,5) RC(0,6) RC(0,7) RC(0,8) RC(0,9) RC(0,10) RC(0,11) RC(0,12) RC(0,13) RC(0,14) RC(0,15) RC(0,16) RC(0,17)
+        RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4) RC(1,5) RC(1,6) RC(1,7) RC(1,8) RC(1,9) RC(1,10) RC(1,11) RC(1,12) RC(1,13) RC(1,14) RC(1,15) RC(1,16) RC(1,17)
+        RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10) RC(2,11) RC(2,12) RC(2,13) RC(2,14) RC(2,15) RC(2,16) RC(2,17)
+        RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(3,6) RC(3,7) RC(3,8) RC(3,9) RC(3,10) RC(3,11) RC(3,12)         RC(3,14) RC(3,15) RC(3,16)
+        RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5) RC(4,6) RC(4,7) RC(4,8) RC(4,9) RC(4,10) RC(4,11) RC(4,12) RC(4,13) RC(4,14) RC(4,15) RC(4,16) RC(4,17)
+        RC(5,0) RC(5,1) RC(5,2)                 RC(5,6)                         RC(5,10) RC(5,11) RC(5,12) RC(5,13) RC(5,14) RC(5,15) RC(5,16) RC(5,17)
+    >;
+};
+
+/*
+Col:   0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17
+Row0:  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○
+Row1:  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○
+Row2:  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○
+Row3:  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  -  ○  ○  ○  -
+Row4:  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○  ○
+Row5:  ○  ○  ○  -  -  -  ○  -  -  -  ○  ○  ○  ○  ○  ○  ○  ○
+
+*/
+
+    // default_kscan: kscan {
+    //     compatible = "zmk,kscan-gpio-matrix";
+    //     diode-direction = "col2row";
+
+    //     row-gpios
+    //         = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> 
+    //         , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+    //         , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+    //         ;
+
+    //     col-gpios
+    //         = <&pro_micro 7 GPIO_ACTIVE_HIGH>
+    //         , <&pro_micro 6 GPIO_ACTIVE_HIGH>
+    //         , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+    //         , <&shift_reg 0 GPIO_ACTIVE_HIGH>
+    //         ;
+    // };
+
+    // default_transform: keymap_transform_0 {
+    //     compatible = "zmk,matrix-transform";
+    //     columns = <4>;
+    //     rows = <3>;
+    //     map = <
+    //         RC(0,0) RC(0,1) RC(0,2)
+    //         RC(1,0) RC(1,1) RC(1,2)
+    //         RC(2,0) RC(2,1) RC(2,2)
+    //         RC(0,3)
+    //     >;
+    // };
 };
 
 &pinctrl {
     pro_micro_i2c_default: pro_micro_i2c_default {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 31)>;
+            psels = <NRF_PSEL(TWIM_SDA, 1, 11)>, //1.11
+                    <NRF_PSEL(TWIM_SCL, 0, 10)>;
         };
     };
 
     pro_micro_i2c_sleep: pro_micro_i2c_sleep {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 31)>;
+            psels = <NRF_PSEL(TWIM_SDA, 1, 11)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 10)>;
             low-power-enable;
         };
     };
 
     spi1_default: spi1_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 6)>,    // Clock
-                    <NRF_PSEL(SPIM_MOSI, 0, 8)>;   // Data
+            psels = <NRF_PSEL(SPIM_SCK, 0, 29)>,    // CLOCK SRCLK
+                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,   // Data  SER_IN
+                    <NRF_PSEL(SPIM_MISO, 0, 31)>;   // RCLK/Latch
         };
     };
 
     spi1_sleep: spi1_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 6)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 8)>;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 29)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 2)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 31)>;
             low-power-enable;
         };
     };
 
     spi3_default: spi3_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 20)>;
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 4)>;
         };
     };
 
     spi3_sleep: spi3_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 20)>;
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 4)>;
             low-power-enable;
         };
     };
@@ -136,7 +201,6 @@ board_spi: &spi1 {
     pinctrl-0 = <&spi1_default>;
     pinctrl-1 = <&spi1_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
 
     shift_reg: 595@0 {
         compatible = "zmk,gpio-595";
@@ -145,7 +209,7 @@ board_spi: &spi1 {
         spi-max-frequency = <2000000>;
         #gpio-cells = <2>;
         reg = <0>;
-        ngpios = <8>;
+        ngpios = <16>;
     };
 };
 
