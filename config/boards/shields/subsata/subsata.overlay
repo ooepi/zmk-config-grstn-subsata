@@ -23,13 +23,13 @@
         };
     };
 
-    gpio_keys: gpio_keys {
-        compatible = "gpio-keys";
-        sr_key1: sr_key1 {
-            gpios = <&shift_reg 0 (GPIO_ACTIVE_HIGH)>;
-            label = "SR Key 1";
-        };
-    };
+    // gpio_keys: gpio_keys {
+    //     compatible = "gpio-keys";
+    //     sr_key1: sr_key1 {
+    //         gpios = <&shift_reg 0 (GPIO_ACTIVE_HIGH)>;
+    //         label = "SR Key 1";
+    //     };
+    // };
 
     default_kscan: kscan {
     compatible = "zmk,kscan-gpio-matrix";
@@ -206,10 +206,12 @@ board_spi: &spi1 {
         compatible = "zmk,gpio-595";
         status = "okay";
         gpio-controller;
-        spi-max-frequency = <1000000>;
+        spi-max-frequency = <2000000>;
         #gpio-cells = <2>;
-        reg = <1>;
+        reg = <0>;
         ngpios = <16>;
+        write-delay-us = <2>;  // Add write delay
+        latch-delay-us = <2>;  // Add latch delay
     };
 };
 
