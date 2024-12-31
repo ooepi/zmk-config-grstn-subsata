@@ -206,7 +206,7 @@ board_spi: &spi1 {
         compatible = "zmk,gpio-595";
         status = "okay";
         gpio-controller;
-        spi-max-frequency = <4000000>;
+        spi-max-frequency = <1000000>;
         #gpio-cells = <2>;
         reg = <1>;
         ngpios = <16>;
@@ -226,10 +226,10 @@ board_spi: &spi1 {
 
         /* SPI */
         reg = <0>; /* ignored, but necessary for SPI bindings */
-        spi-max-frequency = <4000000>;
+        spi-max-frequency = <1000000>;
 
         /* WS2812 */
-        chain-length = <1>; /* arbitrary; change at will */
+        chain-length = <10>; /* arbitrary; change at will */
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
 
