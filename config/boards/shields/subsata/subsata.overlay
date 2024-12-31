@@ -210,8 +210,6 @@ board_spi: &spi1 {
         #gpio-cells = <2>;
         reg = <0>;
         ngpios = <16>;
-        write-delay-us = <2>;  // Add write delay
-        latch-delay-us = <2>;  // Add latch delay
     };
 };
 
