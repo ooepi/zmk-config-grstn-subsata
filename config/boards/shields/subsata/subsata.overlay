@@ -33,7 +33,7 @@
 
     default_kscan: kscan {
     compatible = "zmk,kscan-gpio-matrix";
-    diode-direction = "col2row";
+    diode-direction = "row2col";
 
     row-gpios
         = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.17 (D2)
@@ -206,7 +206,7 @@ board_spi: &spi1 {
         compatible = "zmk,gpio-595";
         status = "okay";
         gpio-controller;
-        spi-max-frequency = <4000000>;
+        spi-max-frequency = <1000000>;
         #gpio-cells = <2>;
         reg = <0>;
         ngpios = <16>;
