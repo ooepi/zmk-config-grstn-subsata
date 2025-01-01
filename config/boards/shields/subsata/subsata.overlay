@@ -33,7 +33,7 @@
 
     default_kscan: kscan {
     compatible = "zmk,kscan-gpio-matrix";
-    diode-direction = "row2col";
+    diode-direction = "col2row";
 
     row-gpios
         = <&pro_micro 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.17 (D2)
@@ -46,23 +46,23 @@
 
     col-gpios
         // First shift register (columns 0-7)
-        = <&shift_reg 0 GPIO_ACTIVE_HIGH>  // QA - Col 0
-        , <&shift_reg 1  GPIO_ACTIVE_HIGH>  // QB - Col 1
-        , <&shift_reg 2  GPIO_ACTIVE_HIGH>  // QC - Col 2
-        , <&shift_reg 3  GPIO_ACTIVE_HIGH>  // QD - Col 3
-        , <&shift_reg 4  GPIO_ACTIVE_HIGH>  // QE - Col 4
-        , <&shift_reg 5  GPIO_ACTIVE_HIGH>  // QF - Col 5
-        , <&shift_reg 6  GPIO_ACTIVE_HIGH>  // QG - Col 6
-        , <&shift_reg 7  GPIO_ACTIVE_HIGH>  // QH - Col 7
+        = <&shift_reg 0 GPIO_ACTIVE_LOW>>  // QA - Col 0
+        , <&shift_reg 1  GPIO_ACTIVE_LOW>>  // QB - Col 1
+        , <&shift_reg 2  GPIO_ACTIVE_LOW>>  // QC - Col 2
+        , <&shift_reg 3  GPIO_ACTIVE_LOW>>  // QD - Col 3
+        , <&shift_reg 4  GPIO_ACTIVE_LOW>>  // QE - Col 4
+        , <&shift_reg 5  GPIO_ACTIVE_LOW>>  // QF - Col 5
+        , <&shift_reg 6  GPIO_ACTIVE_LOW>>  // QG - Col 6
+        , <&shift_reg 7  GPIO_ACTIVE_LOW>>  // QH - Col 7
         // Second shift register (columns 8-15)
-        , <&shift_reg 8 GPIO_ACTIVE_HIGH>  // QA - Col 8
-        , <&shift_reg 9  GPIO_ACTIVE_HIGH>  // QB - Col 9
-        , <&shift_reg 10  GPIO_ACTIVE_HIGH>  // QC - Col 10
-        , <&shift_reg 11  GPIO_ACTIVE_HIGH>  // QD - Col 11
-        , <&shift_reg 12  GPIO_ACTIVE_HIGH>  // QE - Col 12
-        , <&shift_reg 13  GPIO_ACTIVE_HIGH>  // QF - Col 13
-        , <&shift_reg 14  GPIO_ACTIVE_HIGH>  // QG - Col 14
-        , <&shift_reg 15  GPIO_ACTIVE_HIGH>  // QH - Col 15
+        , <&shift_reg 8 GPIO_ACTIVE_LOW>>  // QA - Col 8
+        , <&shift_reg 9  GPIO_ACTIVE_LOW>>  // QB - Col 9
+        , <&shift_reg 10  GPIO_ACTIVE_LOW>>  // QC - Col 10
+        , <&shift_reg 11  GPIO_ACTIVE_LOW>>  // QD - Col 11
+        , <&shift_reg 12  GPIO_ACTIVE_LOW>>  // QE - Col 12
+        , <&shift_reg 13  GPIO_ACTIVE_LOW>>  // QF - Col 13
+        , <&shift_reg 14  GPIO_ACTIVE_LOW>>  // QG - Col 14
+        , <&shift_reg 15  GPIO_ACTIVE_LOW>>  // QH - Col 15
         // Direct GPIO pins
         , <&pro_micro 1 GPIO_ACTIVE_HIGH>   // P0.06 (D1) - Col 16
         , <&pro_micro 0 GPIO_ACTIVE_HIGH>   // P0.08 (D0) - Col 17
