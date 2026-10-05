@@ -1,2 +1,0 @@
-config SHIELD_SUBSATA
-    def_bool $(shields_list_contains,subsata)

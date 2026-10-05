@@ -1,6 +1,17 @@
+# Firmware builds for the Subsata (nice!nano v2).
+#
+# subsata_keys     Keys and encoder only. Flash this first to test the matrix.
+# subsata_full     Keys, encoder, nice!view and LEDs (brightness capped at 20%).
+# settings_reset   Clears saved settings and Bluetooth pairings. Flash it, then
+#                  flash one of the builds above.
 ---
 include:
   - board: nice_nano_v2
-    shield: lily58_left nice_view_adapter nice_view
+    shield: subsata
+    artifact-name: subsata_keys
   - board: nice_nano_v2
-    shield: lily58_right nice_view_adapter nice_view
+    shield: subsata nice_view
+    cmake-args: -DCONFIG_ZMK_RGB_UNDERGLOW=y
+    artifact-name: subsata_full
+  - board: nice_nano_v2
+    shield: settings_reset
