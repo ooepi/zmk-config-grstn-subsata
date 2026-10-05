@@ -1,0 +1,35 @@
+if SHIELD_SUBSATA_V2
+
+config ZMK_KEYBOARD_NAME
+    default "Subsata v2"
+
+# The shift registers, the nice!view and the LEDs are driven over SPI.
+config SPI
+    default y
+
+if ZMK_RGB_UNDERGLOW
+
+config WS2812_STRIP
+    default y
+
+# External power is the LED load switch on this board (see the overlay), so
+# turning the LEDs off or going to sleep cuts their power completely.
+config ZMK_RGB_UNDERGLOW_EXT_POWER
+    default y
+
+config ZMK_RGB_UNDERGLOW_AUTO_OFF_IDLE
+    default y
+
+# 20 LEDs on their own supply: up to ~0.5 A at 70%.
+config ZMK_RGB_UNDERGLOW_BRT_MAX
+    default 70
+
+config ZMK_RGB_UNDERGLOW_BRT_START
+    default 30
+
+config ZMK_RGB_UNDERGLOW_ON_START
+    default n
+
+endif # ZMK_RGB_UNDERGLOW
+
+endif # SHIELD_SUBSATA_V2
