@@ -1,0 +1,39 @@
+if SHIELD_SUBSATA
+
+config ZMK_KEYBOARD_NAME
+    default "Subsata"
+
+# The two 74HC595 shift registers (and the LEDs and nice!view) are driven over SPI.
+config SPI
+    default y
+
+# The nice!view header uses P0.09 (CS) and P0.10 (SCK), which are the
+# nRF52840's NFC pins until they are switched to plain GPIO.
+config NFCT_PINS_AS_GPIOS
+    default y
+
+if ZMK_RGB_UNDERGLOW
+
+config WS2812_STRIP
+    default y
+
+# The shift registers and the nice!view share the switched 3.3V (VCC) pin with
+# the LEDs. Turning the LEDs off must not cut that power, or most keys stop
+# working. Use the LED power switch on the board to cut power to the LEDs instead.
+config ZMK_RGB_UNDERGLOW_EXT_POWER
+    default n
+
+# 99 LEDs can draw far more than the controller's 3.3V regulator can supply.
+# Keep the brightness low.
+config ZMK_RGB_UNDERGLOW_BRT_MAX
+    default 20
+
+config ZMK_RGB_UNDERGLOW_BRT_START
+    default 10
+
+config ZMK_RGB_UNDERGLOW_ON_START
+    default n
+
+endif # ZMK_RGB_UNDERGLOW
+
+endif # SHIELD_SUBSATA
